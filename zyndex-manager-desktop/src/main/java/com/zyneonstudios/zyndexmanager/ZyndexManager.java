@@ -15,7 +15,7 @@ public class ZyndexManager {
 
     private final ZyndexWebFrame frame;
     private static ArrayList<Index> indexes;
-    public static final String basePath = "B:/Workspaces/IntelliJ/nexus-zyndex-manager/zyndex-manager-web/";
+    public static final String basePath = "https://zyneonstudios.github.io/nexus-zyndex-manager/zyndex-manager-web/";
 
     public ZyndexManager() {
         try {
