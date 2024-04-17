@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home | Zyndex Manager</title>
+        <script src="assets/js/shared.js"></script>
+        <link id="shared-css" rel="stylesheet" href="assets/css/shared.css">
+        <link id="page-css" rel="stylesheet" href="assets/css/index.css">
+        <link id="icons-css" rel='stylesheet' href='assets/fonts/boxicons/css/boxicons.css'>
+    </head>
+    <body>
+        <div class="main flex" id="main">
+            <div class="menu card" id="menu">
+                <div class="item" onclick="toggleMenu();">
+                    <i class='bx bx-menu'></i>
+                    <h3>Toggle menu</h3>
+                </div>
+                <div class="item highlight">
+                    <i class='bx bxs-home'></i>
+                    <h3>Home</h3>
+                </div>
+                <div class="item" onclick="sync('indexes.html');">
+                    <i class='bx bxs-file' ></i>
+                    <h3>Indexes</h3>
+                </div>
+                <div class="item" onclick="sync('settings.html');">
+                    <i class='bx bxs-cog'></i>
+                <h3>Settings</h3>
+            </div>
+                <div class="item" onclick="location.reload();">
+                    <i class='bx bx-refresh' ></i>
+                    <h3>Refresh</h3>
+                </div>
+            </div>
+            <script>syncMenu();</script>
+            <div class="content card" id="content">
+                <div class="message card" id="message">
+                    <h2><span id="message-title">Zyndex Manager (Web)</span><a onclick="hideMessage();">X</a></h2>
+                    <h3 id="message-text">This is an incomplete version of the Zyneon Nexus Zyndex Manager Web app.<br>Please download and use the Desktop version!</h3>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>sendRequest("sync.desktop"); sendRequest("sync.init");</script>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Indexes | Zyndex Manager</title>
+        <script src="assets/js/shared.js"></script>
+        <script src="assets/js/indexes.js"></script>
+        <link id="shared-css" rel="stylesheet" href="assets/css/shared.css">
+        <link id="page-css" rel="stylesheet" href="assets/css/indexes.css">
+        <link id="icons-css" rel='stylesheet' href='assets/fonts/boxicons/css/boxicons.css'>
+    </head>
+    <body>
+    <div class="main flex" id="main">
+        <div class="menu card" id="menu">
+            <div class="item" onclick="toggleMenu();">
+                <i class='bx bx-menu'></i>
+                <h3>Toggle menu</h3>
+            </div>
+            <div class="item highlight" onclick="sync('index.html');">
+                <i class='bx bx-left-arrow-alt'></i>
+                <h3>Back to home</h3>
+            </div>
+            <h3>Actions</h3>
+            <div class="item" onclick="sync('sub/indexes/add.html');">
+                <i class='bx bxs-plus-square'></i>
+                <h3>Add index</h3>
+            </div>
+            <div class="item" onclick="sendRequest('refresh.indexes')">
+                <i class='bx bx-refresh' ></i>
+                <h3>Reload indexes</h3>
+            </div>
+        </div>
+        <script>syncMenu();</script>
+        <div class="content card" id="content">
+            <div class="message card">
+                <h2><span>Indexes Overview</span><a onclick="sync('sub/indexes/add.html')" class="index-add">Add <i class='bx bxs-plus-square'></i></a></h2>
+                <h3>Click on "Add" to create a new or add an existing index.</h3>
+            </div>
+            <div class="message card index-card" id="index-template">
+                <h2><span>Index name</span><a class="index-edit">Edit <i class='bx bx-edit'></i></a></h2>
+                <h3>
+                    index url (if exists)<br>
+                    by index owner<br>
+                </h3>
+                <p>-1 instances</p>
+            </div>
+            <h1 id="loader"><i class='bx bx-loader-alt bx-spin' style='color:#ffffff' ></i> Loading</h1>
+        </div>
+    </div>
+    </body>
+    <script>sendRequest("sync.desktop"); sendRequest("refresh.indexes"); sendRequest("sync.indexes");</script>
+</html>

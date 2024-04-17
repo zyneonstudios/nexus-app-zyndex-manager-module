@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Indexes (add) | Zyndex Manager</title>
+        <script src="../../assets/js/shared.js"></script>
+        <script src="../../assets/js/indexes.js"></script>
+        <link id="shared-css" rel="stylesheet" href="../../assets/css/shared.css">
+        <link id="page-css" rel="stylesheet" href="../../assets/css/indexes.css">
+        <link id="icons-css" rel='stylesheet' href='../../assets/fonts/boxicons/css/boxicons.css'>
+    </head>
+    <body>
+        <div class="main flex" id="main">
+            <div class="menu card" id="menu">
+                <div class="item" onclick="toggleMenu();">
+                    <i class='bx bx-menu'></i>
+                    <h3>Toggle menu</h3>
+                </div>
+                <div class="item highlight" onclick="sync('../../indexes.html');">
+                    <i class='bx bx-left-arrow-alt'></i>
+                    <h3>Back to indexes</h3>
+                </div>
+            </div>
+            <script>syncMenu();</script>
+            <div class="content card" id="content">
+                <div class="message card" id="message">
+                    <h2><span id="message-title">Error: Backend disconnected!</span><a onclick="hideMessage();">X</a></h2>
+                    <h3 id="message-text"></h3>
+                </div>
+                <div class="message card">
+                    <h2><span>Create a new index</span><a onclick="creator();" class="index-add" id="start-creator">Create index <i class='bx bxs-plus-square'></i></a></h2>
+                    <h3>Create and manage a new index (zyndex format) yourself.</h3>
+                    <form id="creator">
+                        <h3>
+                            Name: <label><input id="creator-name" type="text" placeholder="unknown zyndex" required></label>
+                        </h3>
+                        <h3>
+                            Owner: <label><input id="creator-owner" type="text" placeholder="unknown" required></label>
+                        </h3>
+                        <h3>
+                            <label>
+                                <input class="submit" id="creator-submit" type="submit" value="Create">
+                            </label>
+                        </h3>
+                    </form>
+                </div>
+                <div class="message card">
+                    <h2><span>Add an existing index (local)</span><a onclick="sendRequest('index.open')" class="index-edit">Open local index <i class='bx bx-folder-open'></i></a></h2>
+                    <h3>
+                        Add an existing index from your local computer.
+                    </h3>
+                </div>
+                <div class="message card">
+                    <h2><span>Add an existing index (online)</span><label><input type="text" placeholder="https://url.to/index.json" id="url"></label><a onclick="downloadIndex();" class="index-edit">Download index <i class='bx bxs-download'></i></a></h2>
+                    <h3>
+                        Add an existing index from the internet.<br>
+                        Warning: It is important to note that you should/can only edit third-party instances with the permission of the owner.
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>sendRequest("sync.desktop"); preDef();</script>
+</html>

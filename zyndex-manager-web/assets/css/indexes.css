@@ -1,0 +1,89 @@
+.message h2 a.index-edit {
+    padding: 0.3rem 0.35rem 0 0.4rem;
+    max-width: none;
+    background: #abebff;
+    border: 1px #6b8588 solid;
+    color: black;
+}
+
+.message h2 a.index-edit:hover {
+    background: deepskyblue;
+    border: 1px #51c9ff solid;
+    cursor: pointer;
+    color: white;
+}
+
+.message h2 a.index-add {
+    padding: 0.3rem 0.35rem 0 0.4rem;
+    max-width: none;
+    background: palegreen;
+    border: 1px #72886b solid;
+    color: black;
+}
+
+.message h2 a.index-add:hover {
+    cursor: pointer;
+    background: greenyellow;
+    border: 1px #81c120 solid;
+}
+
+.message p {
+    position: absolute;
+    right: 1.5rem;
+    bottom: 0;
+}
+
+#index-template {
+    display: none;
+}
+
+.index-card:hover {
+    background: #1e1e1e !important;
+    border: 1px #e7e7e710 solid;
+}
+
+.index-card {
+    transition: all 0.25s ease;
+}
+
+.message #url {
+
+    position: absolute;
+    right: 14.5rem;
+}
+
+input {
+    background: #090909;
+    color: white;
+    border: none;
+    padding: 0.3rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+#creator {
+    display: none;
+}
+
+input.submit {
+    border-radius: 0.5rem;
+    font-weight: 1;
+    font-size: 1.25rem !important;
+    transition: all 0.25s ease;
+    padding: 0.25rem 0.25rem 0.25rem 0.25rem;
+    max-width: none;
+    background: palegreen;
+    border: 1px #72886b solid;
+    color: black;
+}
+
+input.submit:hover {
+    cursor: pointer;
+    background: greenyellow;
+    border: 1px #81c120 solid;
+}
+
+#message {
+    background: #ff5555 !important;
+    border-color: #ff8282 !important;
+}

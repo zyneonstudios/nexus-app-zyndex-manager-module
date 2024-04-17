@@ -1,0 +1,167 @@
+body {
+    font-family: LTHoopRegular, serif;
+    background: #0f0f0f;
+    user-select: none;
+    color: white;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+@font-face {
+    font-family: LTHoopRegular;
+    src: url("../fonts/lthoop-regular.ttf");
+}
+
+.flex {
+    display: flex;
+}
+
+.card {
+    border-radius: 1rem;
+    background: black;
+    box-shadow: 0 0 0.4rem black;
+}
+
+.main {
+    position: absolute;
+    top: 0; left: 0;
+    width: calc(100% - 2rem);
+    height: calc(100% - 2rem);
+    margin: 1rem;
+}
+
+.main.active {
+    margin-top: 0.4rem !important;
+    height: calc(100% - 1.4rem) !important;
+}
+
+.menu {
+    padding: 0.5rem 0 0 0;
+    margin: 0;
+    width: 4.45rem;
+    transition: width 0.25s ease;
+}
+
+.menu.active {
+    width: 20rem;
+}
+
+.menu .item {
+    display: flex;
+    margin: 0.5rem 1rem 0 1rem;
+    padding: 0.6rem 0.5rem 0.5rem 0.5rem;
+    height: 1.5rem !important;
+    font-size: 1.5rem;
+    font-weight: 1;
+    min-width: 1.5rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.menu .item:hover {
+    background: white;
+    box-shadow: 0 0 0.8rem white;
+    color: black;
+}
+
+.menu h3 {
+    padding: 0;
+    text-align: center;
+    margin: 1rem 0 0 0;
+    display: none;
+}
+
+.menu.active h3 {
+    display: inherit;
+}
+
+.menu .item.highlight {
+    background: deepskyblue !important;
+    box-shadow: 0 0 0.8rem deepskyblue !important;
+    color: #13131c !important;
+}
+
+.menu .item i {
+    padding: 0;
+    margin: 0;
+}
+
+.menu .item h3 {
+    padding: 0 0 0 0.5rem;
+    margin: 0;
+    display: none;
+    white-space: nowrap;
+    font-size: 1.5rem;
+    font-weight: 1;
+}
+
+.menu.active .item h3 {
+    display: inherit;
+}
+
+.content {
+    width: 100%;
+    margin-left: 1rem;
+    padding: 1rem;
+}
+
+.message {
+    position: relative;
+    background: #171717 !important;
+    border: 1px #e7e7e710 solid;
+    margin-bottom: 1rem;
+}
+
+.message h2 {
+    padding: 0 1rem 0 1rem;
+}
+
+.message h2 a {
+    padding: 0.3rem 0.4rem 0 0.4rem;
+    display: flex;
+    position: absolute;
+    max-width: 2rem; max-height: 2rem;
+    background: #e42e2e;
+    border: 1px #f44f4f solid;
+    border-radius: 0.5rem;
+    right: 1rem; top: 1rem;
+    font-weight: 1;
+    color: #ffffff99;
+    transition: all 0.25s ease;
+}
+
+.message h2 a:hover {
+    background: red;
+    border: 1px #e42e2e solid;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.message h3 {
+    margin-top: -0.5rem;
+    padding: 0 1rem 0 1rem;
+    font-weight: 1;
+}
+
+a.link {
+    color: #d8eeff;
+    transition: all 0.25s ease;
+}
+
+a.link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #abebff;
+}
+
+.full {
+    position: absolute !important;
+    background: black !important;
+    width: calc(100% - 2rem) !important;
+    height: calc(100% - 2rem) !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+    color: white !important;
+}
