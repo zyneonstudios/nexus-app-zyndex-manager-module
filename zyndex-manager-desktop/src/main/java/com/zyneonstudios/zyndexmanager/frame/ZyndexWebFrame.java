@@ -5,7 +5,6 @@ import live.nerotv.shademebaby.frame.WebFrame;
 import org.cef.CefSettings;
 import org.cef.browser.CefBrowser;
 import org.cef.handler.CefDisplayHandlerAdapter;
-
 import java.awt.*;
 
 public class ZyndexWebFrame extends WebFrame {

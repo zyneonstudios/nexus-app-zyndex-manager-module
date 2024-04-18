@@ -25,7 +25,7 @@
                 <i class='bx bxs-plus-square'></i>
                 <h3>Add index</h3>
             </div>
-            <div class="item" onclick="sendRequest('refresh.indexes')">
+            <div class="item" onclick="window.location.reload();">
                 <i class='bx bx-refresh' ></i>
                 <h3>Reload indexes</h3>
             </div>
@@ -48,5 +48,10 @@
         </div>
     </div>
     </body>
-    <script>sendRequest("sync.desktop"); sendRequest("refresh.indexes"); sendRequest("sync.indexes");</script>
+    <script>
+        sendRequest("sync.desktop");
+        document.addEventListener("DOMContentLoaded", function() {
+            sendRequest("refresh.indexes"); sendRequest("sync.indexes");
+        });
+    </script>
 </html>

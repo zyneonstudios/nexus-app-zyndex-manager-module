@@ -9,7 +9,6 @@ import com.zyneonstudios.nexus.index.Index;
 import com.zyneonstudios.nexus.index.ReadableZyndex;
 import com.zyneonstudios.zyndexmanager.ZyndexManager;
 import live.nerotv.shademebaby.utils.FileUtil;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
@@ -69,7 +68,7 @@ public class FrameConnector {
                         } else {
                             frame.executeJavaScript("setMessage('Error: Index path already exists','You already have an index with that id!'); showMessage();");
                         }
-                        frame.getBrowser().loadURL(ZyndexManager.basePath+"indexes.html");
+                        frame.getBrowser().loadURL(ZyndexManager.getBasePath()+"indexes.html");
                         return;
                     } catch (Exception ignore) {}
                 }
@@ -89,7 +88,7 @@ public class FrameConnector {
                 } else {
                     frame.executeJavaScript("setMessage('Error: Index path already exists','You already have an index with that id!'); showMessage();");
                 }
-                frame.getBrowser().loadURL(ZyndexManager.basePath+"indexes.html");
+                frame.getBrowser().loadURL(ZyndexManager.getBasePath()+"indexes.html");
                 return;
             } catch (Exception ignore) {}
             frame.executeJavaScript("setMessage('Error: invalid url','You need to submit an valid url to download an index!'); showMessage();");
@@ -120,7 +119,7 @@ public class FrameConnector {
                         String jsonString = gson.toJson(json);
                         writer.write(jsonString);
                     }
-                    frame.getBrowser().loadURL(ZyndexManager.basePath+"indexes.html");
+                    frame.getBrowser().loadURL(ZyndexManager.getBasePath()+"indexes.html");
                 } else {
                     frame.executeJavaScript("setMessage('Error: Index path already exists','You already have an index with that id!'); showMessage();");
                 }
@@ -152,7 +151,6 @@ public class FrameConnector {
         frame.executeJavaScript("setMode('desktop');");
         if(request.equals("init")) {
             frame.setMessage("Zyndex Manager (Desktop)","synchronizing...",true);
-            CompletableFuture.runAsync(ZyndexManager::loadIndexes);
         } else if(request.equals("indexes")) {
             frame.showMessage(false);
             CompletableFuture.runAsync(()-> {

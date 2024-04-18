@@ -3,7 +3,8 @@ package com.zyneonstudios;
 import com.zyneonstudios.zyndexmanager.ZyndexManager;
 import com.zyneonstudios.zyndexmanager.os.OperatingSystem;
 import live.nerotv.shademebaby.logger.Logger;
-
+import live.nerotv.shademebaby.utils.FileUtil;
+import java.io.File;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -16,13 +17,33 @@ public class Main {
     private static String directoryPath;
     private static final OperatingSystem operatingSystem = initialise();
     private static final Logger logger = new Logger("ZXM");
+    private static boolean test = false;
+    private static boolean online = false;
 
     private static ZyndexManager zyndexManager;
 
     public static void main(String[] args) {
         resolveArguments(args);
-        zyndexManager = new ZyndexManager();
+        extractUI();
+        if(online) {
+            zyndexManager = new ZyndexManager("https://zyneonstudios.github.io/nexus-zyndex-manager/zyndex-manager-web/");
+        } else if(test) {
+            zyndexManager = new ZyndexManager("file://B:/Workspaces/IntelliJ/nexus-zyndex-manager/zyndex-manager-web/");
+        } else {
+            zyndexManager = new ZyndexManager();
+        }
         zyndexManager.open();
+    }
+
+    private static void extractUI() {
+        File folder = new File(directoryPath+"libs/zyneon");
+        if(folder.exists()) {
+            FileUtil.deleteFolder(folder);
+        }
+        String path = directoryPath+"libs/zyneon/ui.zip";
+        FileUtil.extractResourceFile("ui.zip",path,Main.class);
+        FileUtil.unzipFile(path,directoryPath+"libs/zyneon/ui/");
+        logger.debug("Deleted UI zip: "+new File(path).delete());
     }
 
     public static String getDirectoryPath() {
@@ -41,6 +62,12 @@ public class Main {
         for (String arg : args) {
             if (arg.equalsIgnoreCase("--debug")) {
                logger.setDebugEnabled(true);
+            }
+            if (arg.equalsIgnoreCase("--test")) {
+                test = true;
+            }
+            if (arg.equalsIgnoreCase("--online")) {
+                online = true;
             }
         }
     }

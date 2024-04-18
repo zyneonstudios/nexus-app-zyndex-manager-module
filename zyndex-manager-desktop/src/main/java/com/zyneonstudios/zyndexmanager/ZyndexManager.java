@@ -5,7 +5,6 @@ import com.zyneonstudios.Main;
 import com.zyneonstudios.nexus.index.Index;
 import com.zyneonstudios.nexus.index.Zyndex;
 import com.zyneonstudios.zyndexmanager.frame.ZyndexWebFrame;
-
 import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -15,9 +14,18 @@ public class ZyndexManager {
 
     private final ZyndexWebFrame frame;
     private static ArrayList<Index> indexes;
-    public static final String basePath = "https://zyneonstudios.github.io/nexus-zyndex-manager/zyndex-manager-web/";
+    private static String basePath = "file://"+Main.getDirectoryPath()+"libs/zyneon/ui/";
 
     public ZyndexManager() {
+        try {
+            FlatDarkLaf.setup();
+            UIManager.setLookAndFeel(new FlatDarkLaf());
+        } catch (Exception ignore) {}
+        frame = new ZyndexWebFrame(basePath+"index.html", Main.getDirectoryPath()+"libs/jcef/");
+    }
+
+    public ZyndexManager(String ui) {
+        basePath = ui;
         try {
             FlatDarkLaf.setup();
             UIManager.setLookAndFeel(new FlatDarkLaf());
@@ -53,5 +61,9 @@ public class ZyndexManager {
                 }
             }
         }
+    }
+
+    public static String getBasePath() {
+        return basePath;
     }
 }

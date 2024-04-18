@@ -6,6 +6,12 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 @font-face {
@@ -103,6 +109,8 @@ body {
 
 .content {
     width: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
     margin-left: 1rem;
     padding: 1rem;
 }
