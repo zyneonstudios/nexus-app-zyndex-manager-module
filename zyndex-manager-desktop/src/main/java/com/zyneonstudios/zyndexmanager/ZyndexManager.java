@@ -1,10 +1,11 @@
 package com.zyneonstudios.zyndexmanager;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import com.zyneonstudios.Main;
+import com.zyneonstudios.application.ZyndexManagerModule;
+import com.zyneonstudios.application.frame.web.ApplicationFrame;
 import com.zyneonstudios.nexus.index.Index;
 import com.zyneonstudios.nexus.index.Zyndex;
-import com.zyneonstudios.zyndexmanager.frame.ZyndexWebFrame;
+
 import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -12,35 +13,32 @@ import java.util.Objects;
 
 public class ZyndexManager {
 
-    private final ZyndexWebFrame frame;
+    private final ZyndexManagerModule module;
+    private final ApplicationFrame frame;
     private static ArrayList<Index> indexes;
     private static String basePath = "file://"+Main.getDirectoryPath()+"libs/zyneon/ui/";
 
-    public ZyndexManager() {
+    public ZyndexManager(ZyndexManagerModule module) {
         try {
             FlatDarkLaf.setup();
             UIManager.setLookAndFeel(new FlatDarkLaf());
         } catch (Exception ignore) {}
-        frame = new ZyndexWebFrame(basePath+"index.html", Main.getDirectoryPath()+"libs/jcef/");
+        this.module = module;
+        frame = (ApplicationFrame) module.getApplication().getFrame();
     }
 
-    public ZyndexManager(String ui) {
+    public ZyndexManager(ZyndexManagerModule module, String ui) {
         basePath = ui;
         try {
             FlatDarkLaf.setup();
             UIManager.setLookAndFeel(new FlatDarkLaf());
         } catch (Exception ignore) {}
-        frame = new ZyndexWebFrame(basePath+"index.html", Main.getDirectoryPath()+"libs/jcef/");
-    }
-
-    public ZyndexWebFrame getFrame() {
-        return frame;
+        this.module = module;
+        frame = (ApplicationFrame) module.getApplication().getFrame();
     }
 
     public void open() {
-        frame.setSize(1152,648);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        frame.getBrowser().loadURL(basePath+"index.html");
     }
 
     public static ArrayList<Index> getIndexes() {

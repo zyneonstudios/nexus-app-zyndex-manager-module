@@ -4,11 +4,15 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.zyneonstudios.Main;
+import com.zyneonstudios.zyndexmanager.Main;
+import com.zyneonstudios.application.ZyndexManagerModule;
+import com.zyneonstudios.application.frame.web.ApplicationFrame;
+import com.zyneonstudios.application.modules.ModuleConnector;
 import com.zyneonstudios.nexus.index.Index;
 import com.zyneonstudios.nexus.index.ReadableZyndex;
 import com.zyneonstudios.zyndexmanager.ZyndexManager;
 import live.nerotv.shademebaby.utils.FileUtil;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
@@ -16,15 +20,47 @@ import java.io.*;
 import java.net.URI;
 import java.util.concurrent.CompletableFuture;
 
-public class FrameConnector {
+public class FrameConnector extends ModuleConnector {
 
-    private final ZyndexWebFrame frame;
+    private final ApplicationFrame frame;
+    private final ZyndexManagerModule module;
 
-    public FrameConnector(ZyndexWebFrame frame) {
-        this.frame = frame;
+    public FrameConnector(ZyndexManagerModule module) {
+        super(module);
+        this.frame = (ApplicationFrame)module.getApplication().getFrame();
+        this.module = module;
     }
 
-    public void resolve(String request) {
+    public void setMessage(String title, String text, boolean show) {
+        setMessage(title,text);
+        showMessage(show);
+    }
+
+    public void setMessage(String title, String text) {
+        frame.executeJavaScript("setMessage('"+title+"','"+text+"');");
+    }
+
+    public void showMessage(boolean show) {
+        if(show) {
+            frame.executeJavaScript("showMessage();");
+        } else {
+            frame.executeJavaScript("hideMessage();");
+        }
+    }
+
+    @Override
+    public void resolveRequest(String request) {
+        if(request.startsWith("bridge.")) {
+            resolve(request.replaceFirst("bridge.",""));
+        } else if(request.equals("init.settings")) {
+            frame.executeJavaScript("addModuleSetting('bx bx-objects-horizontal-left','Zyndex Manager','init.zyndexManager','nexus.zyndexManager',false);");
+        } else if(request.equals("init.zyndexManager")) {
+            frame.getBrowser().loadURL(ZyndexManager.getBasePath()+"index.html");
+        }
+    }
+
+    private void resolve(String request) {
+        Main.getLogger().log("[REQREAD] "+request);
         if(request.startsWith("sync.")) {
             sync(request.replace("sync.", ""));
         } else if(request.startsWith("refresh.")) {
@@ -113,7 +149,11 @@ public class FrameConnector {
                     json.add("instances", instances);
                     File file = new File(Main.getDirectoryPath() + "indexes/" + id + "/index.json");
                     if (!file.exists()) {
-                        file.createNewFile();
+                        boolean success = file.createNewFile();
+                        Main.getLogger().log("New index file created: "+success);
+                        if(!success) {
+                            throw new RuntimeException("Unknown error while creating index file...");
+                        }
                     }
                     try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                         String jsonString = gson.toJson(json);
@@ -150,9 +190,10 @@ public class FrameConnector {
     private void sync(String request) {
         frame.executeJavaScript("setMode('desktop');");
         if(request.equals("init")) {
-            frame.setMessage("Zyndex Manager (Desktop)","synchronizing...",true);
+            frame.setTitlebar("Zyndex Manager",Color.decode("#0f0f0f"),Color.white);
+            setMessage("Zyndex Manager (Desktop)","synchronizing...",true);
         } else if(request.equals("indexes")) {
-            frame.showMessage(false);
+            showMessage(false);
             CompletableFuture.runAsync(()-> {
                 for(Index index:ZyndexManager.getIndexes()) {
                     addIndexToList(index);
@@ -160,9 +201,9 @@ public class FrameConnector {
                 frame.executeJavaScript("document.getElementById('loader').style.display = 'none';");
             });
         } else if(request.equals("settings")) {
-            frame.showMessage(false);
+            showMessage(false);
         } else {
-            frame.showMessage(false);
+            showMessage(false);
         }
     }
 

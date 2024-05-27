@@ -2,13 +2,13 @@
     padding: 0.3rem 0.35rem 0 0.4rem;
     max-width: none;
     background: #abebff;
-    border: 1px #6b8588 solid;
+    border-color: #6b8588;
     color: black;
 }
 
 .message h2 a.index-edit:hover {
     background: deepskyblue;
-    border: 1px #51c9ff solid;
+    border-color: #51c9ff;
     cursor: pointer;
     color: white;
 }
@@ -17,14 +17,14 @@
     padding: 0.3rem 0.35rem 0 0.4rem;
     max-width: none;
     background: palegreen;
-    border: 1px #72886b solid;
+    border-color: #72886b;
     color: black;
 }
 
 .message h2 a.index-add:hover {
     cursor: pointer;
     background: greenyellow;
-    border: 1px #81c120 solid;
+    border-color: #81c120;
 }
 
 .message p {
@@ -39,7 +39,7 @@
 
 .index-card:hover {
     background: #1e1e1e !important;
-    border: 1px #e7e7e710 solid;
+    border-color: #e7e7e710;
 }
 
 .index-card {
@@ -47,7 +47,6 @@
 }
 
 .message #url {
-
     position: absolute;
     right: 14.5rem;
 }
@@ -73,14 +72,14 @@ input.submit {
     padding: 0.25rem 0.25rem 0.25rem 0.25rem;
     max-width: none;
     background: palegreen;
-    border: 1px #72886b solid;
+    border-color: #72886b;
     color: black;
 }
 
 input.submit:hover {
     cursor: pointer;
     background: greenyellow;
-    border: 1px #81c120 solid;
+    border-color: #81c120;
 }
 
 #message {

@@ -1,9 +1,11 @@
-package com.zyneonstudios;
+package com.zyneonstudios.zyndexmanager;
 
-import com.zyneonstudios.zyndexmanager.ZyndexManager;
+import com.zyneonstudios.application.ZyndexManagerModule;
+import com.zyneonstudios.application.main.ApplicationConfig;
 import com.zyneonstudios.zyndexmanager.os.OperatingSystem;
 import live.nerotv.shademebaby.logger.Logger;
 import live.nerotv.shademebaby.utils.FileUtil;
+
 import java.io.File;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -17,22 +19,17 @@ public class Main {
     private static String directoryPath;
     private static final OperatingSystem operatingSystem = initialise();
     private static final Logger logger = new Logger("ZXM");
-    private static boolean test = false;
-    private static boolean online = false;
+    private static String custom_ui = null;
 
-    private static ZyndexManager zyndexManager;
-
-    public static void main(String[] args) {
-        resolveArguments(args);
-        extractUI();
-        if(online) {
-            zyndexManager = new ZyndexManager("https://zyneonstudios.github.io/nexus-zyndex-manager/zyndex-manager-web/");
-        } else if(test) {
-            zyndexManager = new ZyndexManager("file://B:/Workspaces/IntelliJ/nexus-zyndex-manager/zyndex-manager-web/");
+    public static void main(ZyndexManagerModule module) {
+        resolveArguments(ApplicationConfig.getArguments());
+        if(custom_ui!=null) {
+            logger.log("Custom UI enabled! ("+custom_ui+")");
+            new ZyndexManager(module,custom_ui).open();
         } else {
-            zyndexManager = new ZyndexManager();
+            extractUI();
+            new ZyndexManager(module).open();
         }
-        zyndexManager.open();
     }
 
     private static void extractUI() {
@@ -59,16 +56,22 @@ public class Main {
     }
 
     private static void resolveArguments(String[] args) {
+        int i = 0;
         for (String arg : args) {
             if (arg.equalsIgnoreCase("--debug")) {
                logger.setDebugEnabled(true);
             }
-            if (arg.equalsIgnoreCase("--test")) {
-                test = true;
-            }
             if (arg.equalsIgnoreCase("--online")) {
-                online = true;
+                custom_ui = "https://zyneonstudios.github.io/nexus-zyndex-manager/zyndex-manager-web/";
             }
+            if(arg.equalsIgnoreCase("--ui")) {
+                if(args.length-1>i) {
+                    if(!args[i+1].startsWith("--")) {
+                        custom_ui = args[i+1];
+                    }
+                }
+            }
+            i = i + 1;
         }
     }
 

@@ -118,7 +118,7 @@ body {
 .message {
     position: relative;
     background: #171717 !important;
-    border: 1px #e7e7e710 solid;
+    border: 2px #e7e7e710 solid;
     margin-bottom: 1rem;
 }
 
@@ -142,7 +142,7 @@ body {
 
 .message h2 a:hover {
     background: red;
-    border: 1px #e42e2e solid;
+    border-color: #e42e2e;
     cursor: pointer;
     color: #ffffff;
 }

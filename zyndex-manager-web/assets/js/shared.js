@@ -9,7 +9,7 @@ document.addEventListener('dragstart', function(e){
 });
 
 function sendRequest(request) {
-    console.log("[BRIDGE] "+request)
+    console.log("[CONNECTOR] bridge."+request);
 }
 
 function syncMenu() {

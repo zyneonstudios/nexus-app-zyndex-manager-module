@@ -6,7 +6,7 @@
 
     <groupId>com.zyneonstudios</groupId>
     <artifactId>zyndex-manager</artifactId>
-    <version>2024.4</version>
+    <version>2024.5</version>
     <packaging>pom</packaging>
 
     <modules>

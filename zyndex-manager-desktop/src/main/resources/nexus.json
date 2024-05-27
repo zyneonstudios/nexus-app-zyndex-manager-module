@@ -1,0 +1,14 @@
+{
+  "modules": [
+    {
+      "authors": [
+        "Zyneon Studios",
+        "NEXUS Team",
+        "nerotvlive"
+      ],
+      "main": "com.zyneonstudios.application.ZyndexManagerModule",
+      "name": "Zyndex Manager",
+      "version": "2024.5-beta.9"
+    }
+  ]
+}
